@@ -15,11 +15,11 @@ Please refer to the documentation here: https://wiki.alephium.org/full-node/devn
 Compile the TypeScript files into JavaScript:
 
 ```
-npx @alephium/cli@latest compile 
+npm run compile
 ```
 
 ## Testing
 
 ```
-npx @alephium/cli@latest test
+npm run test
 ```
