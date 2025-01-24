@@ -90,12 +90,20 @@ async function bridge() {
   // In contract inputs, each asset is unique in terms of address
   const contractInputs = simulationResult.contractInputs
 
-  // After calculating the asset diff:
-  // For all the positive amounts for both alph and tokens, it is flowing out of the wallet address
-  // For all the negative amounts for both alph and tokens, it is flowing into the wallet address
   const { alphDiffs, tokenDiffs } = calculateAssetDiff(generatedOutputs, contractInputs)
-  console.log('Alph diff:', alphDiffs)
-  console.log('Token diff:', tokenDiffs)
+  if (alphDiffs > 0n) {
+    console.log(`${signerAddress} is sending out ${alphDiffs} atto alph`)
+  } else if (alphDiffs < 0n) {
+    console.log(`${signerAddress} is receiving ${alphDiffs} atto alph`)
+  }
+
+  tokenDiffs.forEach((amount, tokenId) => {
+    if (amount > 0n) {
+      console.log(`${signerAddress} is sending out ${amount} token ${tokenId}`)
+    } else if (amount < 0n) {
+      console.log(`${signerAddress} is receiving ${amount} token${tokenId}`)
+    }
+  })
 }
 
 bridge()
